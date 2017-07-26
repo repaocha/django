@@ -1,20 +1,16 @@
 使用django-admin.py来创建HelloWorld项目:
 django-admin.py startproject HelloWorld
 
-$ cd HelloWorld/
+$ cd HelloWorld/        #项目的一个容器,它的命名对Django无关紧要
 $ tree
 .
-|-- HelloWorld
-|   |-- __init__.py
-|   |-- settings.py
-|   |-- urls.py
-|   `-- wsgi.py
-`-- manage.py
+|-- HelloWorld           #项目的真正的Python包,它是你导入任何东西时将需要使用的Python包的名字
+|   |-- __init__.py       #一个空的文件，告诉python该目录是一个python包
+|   |-- settings.py      #该python项目的配置
+|   |-- urls.py           #该python项目的URL声明
+|   `-- wsgi.py           #用于项目的与WSGI兼容的Web服务器入口
+`-- manage.py             #一个命令行工具，可以让你以各种方式与该django项目进行交换
 
-manage.py:一个命令行工具，可以让你以各种方式与该django项目进行交换
-__init__.py:一个空的文件，告诉python该目录是一个python包
-settings.py:该python项目的配置
-urls.py:该python项目的URL声明
 
 启动服务器:
 python manage.py runserver 0.0.0.0:8000
@@ -88,3 +84,20 @@ Admin 管理工具
 激活管理工具:生成项目时会在 urls.py 中自动设置好
 使用管理工具:启动开发服务器，然后在浏览器中访问     可以通过命令 python manage.py createsuperuser 来创建超级用户
 内联(Inline)显示
+
+启用 USE_TZ = True 后,获取当前时间:
+import datetime 
+from django.utils.timezone import utc
+utcnow = datetime.datetime.utcnow().replace(tzinfo=utc)
+
+migrate:运行这些迁移文件并自动管理你的数据库模式的命令.
+sqlmigrate:接收迁移文件的名字并返回它们的SQL语句的命令.
+
+实现模型变更的三个步骤：
+修改你的模型（在models.py文件中)
+运行python manage.py makemigrations ，为这些修改创建迁移文件
+运行python manage.py migrate ，将这些改变更新到数据库中
+
+
+
+

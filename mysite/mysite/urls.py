@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 """mysite URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -17,4 +18,5 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^polls/',include('polls.urls')),       #插入一个include(),让主URLconf可以链接到polls.urls模块
 ]

@@ -9,3 +9,5 @@ urlpatterns=[
     url(r'^(?P<question_id>[0-9]+)/results/$',views.results,name='result'),  #ex:/polls/5/results/
     url(r'^(?P<question_id>[0-9]+)/vote/$',views.vote,name='vote'),   #ex:/polls/5/vote/    
 ]
+
+#?P<question_id> 定义一个名字,它将用于标识匹配的模式;[0-9]+是匹配一串数字的正则表达式.

@@ -98,6 +98,8 @@ sqlmigrate:接收迁移文件的名字并返回它们的SQL语句的命令.
 运行python manage.py makemigrations ，为这些修改创建迁移文件
 运行python manage.py migrate ，将这些改变更新到数据库中
 
+include()函数的正则表达式的末尾没有$（字符串结束符号）而是一个斜线.
 
+渲染render():将请求对象作为它的第一个参数，模板的名字作为它的第二个参数，一个字典作为它可选的第三个参数.
 
-
+get_object_or_404: 使用get()并在对象不存在时引发Http404.

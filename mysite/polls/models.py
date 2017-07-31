@@ -10,13 +10,16 @@ class Question(models.Model):
 	pub_date=models.DateTimeField('date published')   #发布时间属性
 	def __unicode__(self):
 		return self.question_text
+
 	def was_published_recently(self):
-		return self.pub_date >=timezone.now() - datetime.timedelta(days=1)
+		now = timezone.now()
+		return now - datetime.timedelta(days=1) <= self.pub_date <= now
+
 
 class Choice(models.Model):
 	question=models.ForeignKey(Question)
 	choice_text=models.CharField(max_length=200)      #选择的内容
-	votes=models.IntegerField(default=0)                #选择的得票统计
+	votes=models.IntegerField(default=0)                #得票统计
 	def __unicode__(self):
 		return self.choice_text	
 
@@ -68,7 +71,7 @@ datetime.datetime(2012, 2, 26, 13, 0, 0, 775217, tzinfo=<UTC>)
 >>> Question.objects.all()
 [<Question: Question object>]
 
-编辑Question模型,并添加一个__unicode__()(__str__() on Python3)方法给Question和Choice后
+编辑Question模型,并添加一个__unicode__()(__str__() on Python3)方法给Question和Choice后,再次打开一个新的Python 交互式shell
 
 >>> from polls.models import Question, Choice
 

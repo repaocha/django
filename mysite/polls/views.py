@@ -1,13 +1,13 @@
 # -*- coding:utf-8 -*-
-from django.shortcuts import  get_object_or_404, render
-from django.http import HttpResponse
-from django.template import RequestContext, loader
-from django.views import generic
-from django.http import Http404
-from django.http import HttpResponseRedirect,HttpResponse
-from django.core.urlresolvers import reverse
+#from django.shortcuts import  get_object_or_404, render
+#from django.http import HttpResponse
+#from django.template import RequestContext, loader
+#from django.views import generic
+#from django.http import Http404
+#from django.http import HttpResponseRedirect,HttpResponse
+#from django.core.urlresolvers import reverse
 
-from .models import Choice, Question
+#from .models import Choice, Question
 
 #from . models import Choice,Question
 
@@ -89,6 +89,7 @@ from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.views import generic
+from django.utils import timezone
 
 from .models import Choice, Question
 
@@ -99,12 +100,15 @@ class IndexView(generic.ListView):
 
     def get_queryset(self):
         """返回最后5个发布的问题."""
-        return Question.objects.order_by('-pub_date')[:5]
-
+        return Question.objects.filter(
+           pub_date__lte=timezone.now()
+     ).order_by('-pub_date')[:5]
 
 class DetailView(generic.DetailView):
     model = Question
     template_name = 'polls/detail.html'
+    def get_queryset(self):
+         return Question.objects.filter(pub_date__lte=timezone.now())
 
 
 class ResultsView(generic.DetailView):

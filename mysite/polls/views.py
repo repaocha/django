@@ -82,7 +82,7 @@ from .models import Choice, Question
 #增加Choice的得票数之后，返回一个 HttpResponseRedirect而不是常用的HttpResponse。HttpResponseRedirect只接收一个参数：用户将要被重定向的URL.
 #成功处理POST数据后总是返回一个HttpResponseRedirect.
 #reverse()函数避免了在视图函数中硬编码URL,它需要我们给出我们想要跳转的视图的名字和该视图所对应的URL模式中需要给该视图提供的参数.
-#reverse() 调用将返回一个这样的字符串:'/polls/3/results/',3是p.id的值,重定向的URL将调用'results'视图来显示最终的页面.
+#reverse() 调用将返回一个这样的字符串:'/polls/5/results/',5是p.id的值,重定向的URL将调用'results'视图来显示最终的页面.
 #request是一个HttpRequest对象.
 
 from django.shortcuts import get_object_or_404, render

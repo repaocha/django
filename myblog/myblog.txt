@@ -1,0 +1,59 @@
+创建mysite工程项目：
+[admin@localhost django]$ django-admin.py startproject myblog
+
+在myblog目录下创建blog应用:
+[admin@localhost django]$ cd myblog
+[admin@localhost myblog]$ python manage.pystartapp blog
+
+初始化admin后台数据库:
+使用SQLite
+切换到myblog创建数据库：
+[admin@localhost myblog]$ python manage.py syncdb
+
+设置admin应用:
+添加blog应用,mysite/myblog/settings.py 文件：
+INSTALLED_APPS = (
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'blog',
+)
+启动django开发服务器:
+[admin@localhost myblog]$ python manage.py runserver
+访问后台应用:
+http://127.0.0.1:8000/admin
+
+设计Model(即设计数据库表):
+1、设计model
+2、再次初始化数据库:
+[admin@localhost myblog]$ python manage.py makemigrations blog
+[admin@localhost myblog]$ python manage.py syncdb
+3、再次runserver启动服务，访问admin后台，创建文章.登陆成功选择add 创建博客.
+
+设置admin 的BlogsPost界面:
+创建BlogPostAdmin类，继承admin.ModelAdmin父类，以列表的形式显示BlogPost的标题和时间.
+
+创建blog的公共部分:
+从Django的角度看，一个页面具有三个典型的组件：
+一个模板（template）：模板负责把传递进来的信息显示出来.
+一个视图（view）：视图负责从数据库获取需要显示的信息.
+一个URL模式：它负责把收到的请求和你的试图函数匹配，有时候也会向视图传递一些参数.
+
+创建模板:
+在blog项目下创建templates目录（myblog/blog/templates/）
+
+创建视图函数:
+posts=BlogPost.objects.all();获取数据库里所拥有的BlogPost对象.
+t=loader.get_template("index.html"):加载模板.
+c=Context({'posts':posts}):模板的渲染的数据是有一个字典类的对象Context提供，这里是一对键值对.
+
+创建blog的URL模式:
+
+添加样式:
+
+
+原文链接:http://www.cnblogs.com/fnng/p/3737964.html
+

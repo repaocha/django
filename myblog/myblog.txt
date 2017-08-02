@@ -57,3 +57,5 @@ c=Context({'posts':posts}):模板的渲染的数据是有一个字典类的对�
 
 原文链接:http://www.cnblogs.com/fnng/p/3737964.html
 
+博客页面只能使用127.0.0.1：8000访问，使用10.0.1.150:8000访问不成功.
+解决方法:设置ALLOWED_HOSTS = ['*'],但是强烈不推荐这么做。如果你的DEBUG设置为False，则必须设置ALLOWED_HOSTS. 在开发阶段可以设置DEBUG为True.
